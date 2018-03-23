@@ -1,4 +1,4 @@
-package es.unican.is2.practica3.view;
+package es.unican.is2.practica3.Runner;
 
 import es.unican.is2.practica3.controller.DespertadorBuzzAction;
 import es.unican.is2.practica3.controller.DespertadorOffAction;
@@ -6,8 +6,9 @@ import es.unican.is2.practica3.controller.DespertadorOnAction;
 import es.unican.is2.practica3.controller.DespertadorSnoozeAction;
 import es.unican.is2.practica3.controller.DespertadorStopAction;
 import es.unican.is2.practica3.model.Despertador;
+import es.unican.is2.practica3.view.DespertadorGUI;
 
-public class DespertadorMVC {
+public class DespertadorRunner {
 
 	public static void main(String[] args) {
 		Despertador model = new Despertador();
