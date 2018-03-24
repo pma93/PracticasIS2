@@ -4,6 +4,13 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**	
+ * 	TimedStateController.java
+ *	Clase que controla los estados y realiza operaciones con
+ *	el estado actual del despertador
+ *	@author: Pablo Martinez Arana
+ *	@version: 03/2018
+ */
 public class TimedStateController {
 	private static TimedStateController myTimedStateController;
 	private static Timer timer;
@@ -14,25 +21,29 @@ public class TimedStateController {
 	/**
 	 * Metodo constructor que inicializa el timer
 	 */
-	private TimedStateController() {
+	private TimedStateController() 
+	{
 		timer = new Timer();
 	}
 
 	// Implementacion del patron Singleton
-	public static TimedStateController getInstance() {
-		if (myTimedStateController == null) {
+	public static TimedStateController getInstance() 
+	{
+		if (myTimedStateController == null) 
+		{
 			myTimedStateController = new TimedStateController();
 		}
-
 		return myTimedStateController;
 	}
 	
-	/*
+	/**
 	 * Clase que llama al timeout del estado actual cuando
 	 * expira el timer
 	 */
-	private class ExpiraTimerTask extends TimerTask {
-		public void run() {
+	private class ExpiraTimerTask extends TimerTask 
+	{
+		public void run() 
+		{
 			estado.timeout(context);
 		}
 	}
@@ -43,7 +54,8 @@ public class TimedStateController {
 	 * @param estado estado actual
 	 * @param milis tiempo a esperar
 	 */
-	public void startRelative(Despertador context, TimedState estado, int milis) {
+	public void startRelative(Despertador context, TimedState estado, int milis) 
+	{
 		this.context = context;
 		this.estado = estado;
 		this.expiraTimerTask = new ExpiraTimerTask();
@@ -56,7 +68,8 @@ public class TimedStateController {
 	 * @param estado estado actual
 	 * @param instante tiempo en el que acabar 
 	 */
-	public void startAbsolute(Despertador context, TimedState estado, Date instante) {
+	public void startAbsolute(Despertador context, TimedState estado, Date instante) 
+	{
 		this.context = context;
 		this.estado = estado;
 		this.expiraTimerTask = new ExpiraTimerTask();
@@ -71,4 +84,5 @@ public class TimedStateController {
 			expiraTimerTask.cancel();
 		}
 	}
+	
 }

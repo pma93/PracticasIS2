@@ -1,17 +1,25 @@
 package es.unican.is2.practica3.model;
 
-/**
- * Clase que define las respuestas a eventos
- * del estado Desprogramado
- * 
- * @author Pablo Martinez Arana
+/**	
+ * 	StateDesprogramado.java
+ *	Clase estado de desprogramado
+ *	@author: Pablo Martinez Arana
+ *	@version: 03/2018
  */
-public class StateDesprogramado extends DespertadorState
-{
-	public StateDesprogramado() {
+public class StateDesprogramado extends DespertadorState {
+	/**
+	 * Metodo constructor
+	 */
+	public StateDesprogramado() 
+	{
 		name = "Desprogramado";
 	}
 	
+	/**
+	 * Metodo que realiza una serie de acciones en 
+	 * el despertador dado al estar en ese estado
+	 * @param context despertador
+	 */
 	public void signalAlarmaOn( Despertador context )
 	{
 		this.exitAction(context);
@@ -21,6 +29,11 @@ public class StateDesprogramado extends DespertadorState
 		getEstadoProgramado().doAction(context);
 	}
 	
+	/**
+	 * Metodo que realiza una serie de acciones en 
+	 * el despertador dado al estar en ese estado
+	 * @param context despertador
+	 */
 	public void signalBuzz( Despertador context )
 	{
 		this.exitAction(context);
@@ -30,7 +43,13 @@ public class StateDesprogramado extends DespertadorState
 		getEstadoDesprogramado().doAction(context);
 	}
 	
-	public void entryAction(Despertador context) {
+	/**
+	 * Metodo entry que realiza una serie de acciones en 
+	 * el despertador dado al entrar en el estado
+	 * @param context despertador
+	 */
+	public void entryAction(Despertador context) 
+	{
 		context.getPiloto().off();
 	}
 	

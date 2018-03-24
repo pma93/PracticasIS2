@@ -8,10 +8,23 @@ import es.unican.is2.practica3.controller.DespertadorStopAction;
 import es.unican.is2.practica3.model.Despertador;
 import es.unican.is2.practica3.view.DespertadorGUI;
 
+/**	
+ * 	DespertadorRunner.java
+ *	Clase para la creacion del MVC
+ *	@author: Pablo Martinez Arana
+ *	@version: 03/2018
+ */
 public class DespertadorRunner {
-
+	/**
+	 * Esta clase se encarga de crear el modelo, la vista y los controladores 
+	 * (ademas de relacionar dichos controladores con la vista y el modelo)
+	 */
 	public static void main(String[] args) {
 		Despertador model = new Despertador();
+		/**
+		 *  Sacamos una interfaz para comprobar el correcto funcionamiento de MVC
+		 *  	- Dicha interfaz se encargara de la gestion del despertador 
+		 */	
 		DespertadorGUI view = new DespertadorGUI(model);
 		view.setAlarmaOnAction(new DespertadorOnAction(model, view));
 		view.setAlarmaOffAction(new DespertadorOffAction(model, view));

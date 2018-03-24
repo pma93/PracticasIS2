@@ -1,18 +1,25 @@
-/**
- * Clase que define las respuestas a eventos
- * del estado Sonando
- * 
- * @author Pablo martinez Arana
- */
-
 package es.unican.is2.practica3.model;
 
-public class StateSonando extends DespertadorState implements TimedState
-{
-	public StateSonando() {
+/**	
+ * 	StateSonando.java
+ *	Clase estado de Sonando
+ *	@author: Pablo Martinez Arana
+ *	@version: 03/2018
+ */
+public class StateSonando extends DespertadorState implements TimedState {
+	/**
+	 * Metodo constructor
+	 */
+	public StateSonando() 
+	{
 		name = "Sonando";
 	}
 	
+	/**
+	 * Metodo que realiza una serie de acciones en 
+	 * el despertador dado al estar en ese estado
+	 * @param context despertador
+	 */
 	public void signalStop( Despertador context )
 	{
 		timedStateController.cancel();
@@ -22,9 +29,15 @@ public class StateSonando extends DespertadorState implements TimedState
 		getEstadoProgramado().doAction(context);
 	}
 	
+	/**
+	 * Metodo que realiza una serie de acciones en 
+	 * el despertador dado al estar en ese estado
+	 * @param context despertador
+	 */
 	public void signalSnooze( Despertador context )
 	{
-		if(context.getContadorSnooze() == 2) {
+		if(context.getContadorSnooze() == 3) 
+		{
 			timedStateController.cancel();
 			this.exitAction(context);
 			context.setState(getEstadoProgramado());
@@ -41,6 +54,11 @@ public class StateSonando extends DespertadorState implements TimedState
 		}
 	}
 	
+	/**
+	 * Metodo entry que realiza una serie de acciones en 
+	 * el despertador dado al entrar en el estado
+	 * @param context despertador
+	 */
 	public void entryAction( Despertador context )
 	{
 		context.activarAlarma();
@@ -53,12 +71,23 @@ public class StateSonando extends DespertadorState implements TimedState
 		timedStateController.startRelative(context, this, context.getIntervaloAlarma()*60*1000);
 	}
 	
+	/**
+	 * Metodo exit que realiza una serie de acciones en 
+	 * el despertador dado al salir del estado
+	 * @param context despertador
+	 */
 	public void exitAction( Despertador context )
 	{
 		context.desactivarAlarma();
 	}
 
-	public void timeout(Despertador context) {
+	/**
+	 * Metodo que actua cuando se acaba el tiempo de espera y
+	 * se desprograma el despertador
+	 * @param context despertador
+	 */
+	public void timeout(Despertador context) 
+	{
 		this.exitAction(context);
 		context.cambiaHora();
 		getEstadoDesprogramado().entryAction(context);
