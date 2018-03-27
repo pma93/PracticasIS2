@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.imageio.ImageIO;
-import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -19,6 +18,7 @@ import java.io.InputStream;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 
 /**	
  * 	DespertadorGUI.java
@@ -176,45 +176,45 @@ public class DespertadorGUI extends JFrame implements PropertyChangeListener {
 	 * Asigna manejador al boton AlarmaOn
 	 * @param l Manejador
 	 */
-	public void setAlarmaOnAction(Action action) 
+	public void setAlarmaOnAction(ActionListener action) 
 	{
-		btnAlarmaOn.setAction(action);
+		btnAlarmaOn.addActionListener(action);
 	}
 
 	/**
 	 * Asigna manejador al boton AlarmaOff
 	 * @param l Manejador
 	 */
-	public void setAlarmaOffAction(Action action) 
+	public void setAlarmaOffAction(ActionListener action) 
 	{
-		btnAlarmaOff.setAction(action);
+		btnAlarmaOff.addActionListener(action);
 	}
 
 	/**
 	 * Asigna manejador al boton Snooze
 	 * @param l Manejador
 	 */
-	public void setSnoozeAction(Action action) 
+	public void setSnoozeAction(ActionListener action) 
 	{
-		btnSnooze.setAction(action);
+		btnSnooze.addActionListener(action);
 	}
 
 	/**
 	 * Asigna manejador al boton Stop
 	 * @param l Manejador
 	 */
-	public void setStopAction(Action action) 
+	public void setStopAction(ActionListener action) 
 	{
-		btnStop.setAction(action);
+		btnStop.addActionListener(action);
 	}
 
 	/**
 	 * Asigna manejador al boton Buzz
 	 * @param l Manejador
 	 */
-	public void setBuzzAction(Action action) 
+	public void setBuzzAction(ActionListener action) 
 	{
-		btnBuzz.setAction(action);
+		btnBuzz.addActionListener(action);
 	}
 	
 	/**
