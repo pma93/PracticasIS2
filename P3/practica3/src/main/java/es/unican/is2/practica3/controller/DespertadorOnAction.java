@@ -4,6 +4,7 @@ import es.unican.is2.practica3.model.Despertador;
 import es.unican.is2.practica3.view.DespertadorGUI;
 
 import java.awt.event.ActionEvent;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.AbstractAction;
@@ -26,6 +27,7 @@ public class DespertadorOnAction extends AbstractAction {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	Calendar calendar;
 	private Despertador model;
 	private DespertadorGUI view;
 	
@@ -45,15 +47,16 @@ public class DespertadorOnAction extends AbstractAction {
 	 * Cada clase Action tendra un metodo actionPerformed que se llamara 
 	 * cuando un componente grafico asociado desencadene una accion
 	 */
-	@SuppressWarnings("deprecation")
 	public void actionPerformed(ActionEvent e) 
 	{
-		int h = Integer.parseInt(view.horaAlarma.getText());
-		int m = Integer.parseInt(view.minAlarma.getText());
+		calendar = Calendar.getInstance();
+		int h = Integer.parseInt(view.horaAlarma.getSelectedItem().toString());
+		int m = Integer.parseInt(view.minAlarma.getSelectedItem().toString());
 		Date fecha = new Date();
-		fecha.setHours(h);
-		fecha.setMinutes(m);
-		fecha.setSeconds(0);
+		calendar.set(Calendar.HOUR_OF_DAY, h);
+		calendar.set(Calendar.MINUTE, m);
+		calendar.set(Calendar.SECOND, 0);
+		fecha = calendar.getTime();
 		model.signalAlarmaOn(fecha);
 	}
 

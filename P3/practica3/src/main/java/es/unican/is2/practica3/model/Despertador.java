@@ -43,6 +43,7 @@ public class Despertador {
 	public void activarAlarma( )
 	{
 		System.out.println("Alarma sonando");
+		
 	}
 	
 	/**

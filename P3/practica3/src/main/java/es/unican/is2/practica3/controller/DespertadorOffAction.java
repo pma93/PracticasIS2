@@ -1,7 +1,6 @@
 package es.unican.is2.practica3.controller;
 
 import es.unican.is2.practica3.model.Despertador;
-import es.unican.is2.practica3.view.DespertadorGUI;
 
 import java.awt.event.ActionEvent;
 
@@ -26,17 +25,15 @@ public class DespertadorOffAction extends AbstractAction {
 	private static final long serialVersionUID = 1L;
 	
 	private Despertador model;
-	private DespertadorGUI view;
 	
 	/** 
 	 * La clase Action puede definir algunos valores determinados 
 	 * como el nombre de la accion, la descripcion, etc. que 
 	 * compartiran todos los componentes graficos que utilicen dicha accion
 	 */
-	public DespertadorOffAction(Despertador model, DespertadorGUI view) 
+	public DespertadorOffAction(Despertador model) 
 	{
 		this.model = model;
-		this.view = view;
 		putValue(Action.NAME, "DespertadorOff");
 	}
 	
@@ -47,7 +44,6 @@ public class DespertadorOffAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) 
 	{
 		model.signalAlarmaOff();
-		view.clearAlarma();
 	}
 	
 }

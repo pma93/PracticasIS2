@@ -1,5 +1,7 @@
 package es.unican.is2.practica3.model;
 
+import java.awt.Toolkit;
+
 /**	
  * 	StateSonando.java
  *	Clase estado de Sonando
@@ -48,7 +50,7 @@ public class StateSonando extends DespertadorState implements TimedState {
 			this.exitAction(context);
 			context.setState(getEstadoSnooze());
 			context.sumaContadorSnooze();
-			System.out.println(""+ context.getContadorSnooze());
+			System.out.println("Boton pulsado:"+ context.getContadorSnooze()+" "+"veces");
 			getEstadoSnooze().entryAction(context);
 			getEstadoSnooze().doAction(context);
 		}
@@ -67,6 +69,7 @@ public class StateSonando extends DespertadorState implements TimedState {
 		}
 		if(context.getBuzz() == true) {
 			System.out.println("Sonando Pitido");
+			Toolkit.getDefaultToolkit().beep();
 		}
 		timedStateController.startRelative(context, this, context.getIntervaloAlarma()*60*1000);
 	}
