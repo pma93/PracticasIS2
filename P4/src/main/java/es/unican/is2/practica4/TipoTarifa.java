@@ -7,5 +7,5 @@ package es.unican.is2.practica4;
  * @author Pablo Martinez Arana
  */
 public enum TipoTarifa {
-	TARIFA_A, TARIFA_B, TARIFA_C
+	TARIFA_A, TARIFA_B, TARIFA_C, TARIFA_D 
 }

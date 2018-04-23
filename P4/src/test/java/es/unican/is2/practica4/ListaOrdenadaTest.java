@@ -18,8 +18,6 @@ public class ListaOrdenadaTest {
 	int tamanho;
 	int tamanho1;
 	Integer elem;
-	Integer elem1;
-	Integer elem2;
 
 	@Before
     public void setUp() throws Exception {
@@ -31,7 +29,7 @@ public class ListaOrdenadaTest {
 		//Test get 1
 		//lista.size=0
 		try{
-			elem=lista.get(0);
+			elem=lista.get(0); 
 			fail("No se ha lanzado la excepcion");
 		}catch(IndexOutOfBoundsException e) {
 			//Debe lanzar la excepcion
