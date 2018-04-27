@@ -133,11 +133,10 @@ public class ListaOrdenadaTest {
 		
 		//Test size 12
 		//lista.size()>1
-		lista.remove(0);
 		lista.add(2);
 		lista.add(3);
 		lista.add(4);
-		assertTrue(lista.size()>0);
+		assertTrue(lista.size()>1);
 	}
 
 	@Test

@@ -25,13 +25,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 
-/**
- * Clase que muestra una interfaz para elegir
- * diferentes opciones para calcular
- * el precio de la tarifa.
- * 
- * @author Pablo Martinez Arana
- */
 @SuppressWarnings("serial")
 public class CalculoTarifaGUI extends JFrame {
 
@@ -129,7 +122,7 @@ public class CalculoTarifaGUI extends JFrame {
 				} catch (FechaErronea e) {
 					txtPrecio.setText("Fecha erronea");
 				} catch (ConsumoErroneo e) {
-					txtPrecio.setText("Consumo no valido");
+					txtPrecio.setText("Consumo erroneo"); 
 				}
 			}
 		});

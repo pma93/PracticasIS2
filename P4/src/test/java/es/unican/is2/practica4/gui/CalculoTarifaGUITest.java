@@ -33,7 +33,7 @@ public class CalculoTarifaGUITest {
 			// Caso de prueba correcto
 			demo.textBox("txtFechaAlta").setText("11/07/2015");
 			demo.textBox("txtFechaNacimiento").setText("11/07/1976");
-			demo.textBox("txtConsumo").setText("8");
+			demo.textBox("txtConsumo").setText("8"); 
 			// Sleeps para ralentizar la ejecucion
 			Thread.sleep(2000);
 			// Pulsamos el boton para calcular
@@ -41,17 +41,17 @@ public class CalculoTarifaGUITest {
 			// Comprobamos la salida
 			demo.textBox("txtPrecio").requireText("30.0");
 
-			Thread.sleep(2000);
+			Thread.sleep(2000); 
 
 			// Caso de prueba con fecha incorrecta
 			demo.textBox("txtFechaAlta").setText("2015/02/11");
-			demo.textBox("txtFechaNacimiento").setText("2015");
+			demo.textBox("txtFechaNacimiento").setText("2015"); 
 			demo.textBox("txtConsumo").setText("8");
 			Thread.sleep(2000);
 			// Pulsamos el boton para calcular
 			demo.button("btnCalcular").click();
 			// Comprobamos la salida
-			demo.textBox("txtPrecio").requireText("Fecha incorrecta");
+			demo.textBox("txtPrecio").requireText("Fecha incorrecta"); 
 			Thread.sleep(2000);
 
 			// Caso de prueba con consumo incorrecta
