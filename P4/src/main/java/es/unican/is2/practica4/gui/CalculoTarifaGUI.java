@@ -116,13 +116,13 @@ public class CalculoTarifaGUI extends JFrame {
 					double precio=tarifas18.precio(tarifa, fechaAlta,fechaNacimiento,consumo);
 					txtPrecio.setText(Double.toString(precio));
 				} catch (ParseException e) {
-					txtPrecio.setText("Fecha incorrecta");
+					txtPrecio.setText("Fecha incorrecta"); 
 				} catch (NumberFormatException e) {
 					txtPrecio.setText("Consumo no valido");
 				} catch (FechaErronea e) {
 					txtPrecio.setText("Fecha erronea");
 				} catch (ConsumoErroneo e) {
-					txtPrecio.setText("Consumo erroneo"); 
+					txtPrecio.setText("Consumo erroneo");
 				}
 			}
 		});

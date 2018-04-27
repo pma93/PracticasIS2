@@ -40,21 +40,31 @@ public class CalculoTarifaGUITest {
 			demo.button("btnCalcular").click();
 			// Comprobamos la salida
 			demo.textBox("txtPrecio").requireText("30.0");
-
 			Thread.sleep(2000); 
-
-			// Caso de prueba con fecha incorrecta
+			
+			// Caso de prueba con fecha incorrecta 
 			demo.textBox("txtFechaAlta").setText("2015/02/11");
 			demo.textBox("txtFechaNacimiento").setText("2015"); 
 			demo.textBox("txtConsumo").setText("8");
 			Thread.sleep(2000);
-			// Pulsamos el boton para calcular
+			// Pulsamos el boton para calcular 
 			demo.button("btnCalcular").click();
 			// Comprobamos la salida
 			demo.textBox("txtPrecio").requireText("Fecha incorrecta"); 
 			Thread.sleep(2000);
 
-			// Caso de prueba con consumo incorrecta
+			// Caso de prueba con fecha incorrecta (edad < alta)
+			demo.textBox("txtFechaAlta").setText("11/02/2015");
+			demo.textBox("txtFechaNacimiento").setText("11/02/2020"); 
+			demo.textBox("txtConsumo").setText("8");
+			Thread.sleep(2000);
+			// Pulsamos el boton para calcular 
+			demo.button("btnCalcular").click();
+			// Comprobamos la salida
+			demo.textBox("txtPrecio").requireText("Fecha erronea"); 
+			Thread.sleep(2000);
+
+			// Caso de prueba con consumo incorrecto 
 			demo.textBox("txtFechaAlta").setText("11/07/2015");
 			demo.textBox("txtFechaNacimiento").setText("11/07/1976");
 			demo.textBox("txtConsumo").setText("");
@@ -63,6 +73,17 @@ public class CalculoTarifaGUITest {
 			demo.button("btnCalcular").click();
 			// Comprobamos la salida
 			demo.textBox("txtPrecio").requireText("Consumo no valido");
+			Thread.sleep(2000);
+			
+			// Caso de prueba con consumo incorrecto (consumo < 0)
+			demo.textBox("txtFechaAlta").setText("11/07/2015");
+			demo.textBox("txtFechaNacimiento").setText("11/07/1976");
+			demo.textBox("txtConsumo").setText("-20");
+			Thread.sleep(2000);
+			// Pulsamos el boton para calcular
+			demo.button("btnCalcular").click();
+			// Comprobamos la salida
+			demo.textBox("txtPrecio").requireText("Consumo erroneo");
 			Thread.sleep(2000);
 
 		} catch (InterruptedException e) {
