@@ -10,20 +10,12 @@ import java.util.Date;
  * 
  * @author Pablo Martinez Arana
  */
-public class Tarifas_18 implements ITarifas_18 {
+public class Tarifas_18 implements ITarifas_18{
 	@SuppressWarnings("serial")
 	public static class FechaErronea extends Exception {} //Excepcion que se lanzara cuando fAlta<fNac, fAlta>fActual o
 														//fNac>fActual
 	@SuppressWarnings("serial")
 	public static class ConsumoErroneo extends Exception {} //Excepcion que se lanzara cuando el consumo sea negativo
-
-	// Precios basicos de cada tarifa, es decir,
-	// sin descuento, sin incremento y sin pasarse del consumo
-	private static int precios[] = { 30, 40, 50 };
-	// Limite de consumo para cada tarifa
-	private static final int LIMITE_TARIFA_A = 2000;
-	private static final int LIMITE_TARIFA_B = 4000;
-	private static final int LIMITE_TARIFA_C = 6000;
 	// Consumo a partir del cual se sumaran 4€
 	private static final double CONSUMO = 200.0;
 	// Extra por pasarse del consumo
@@ -41,78 +33,103 @@ public class Tarifas_18 implements ITarifas_18 {
 	 * @param consumo
 	 * @return precio que tendra que pagar cada cliente
 	 * @throws FechaErronea, se lanzara cuando fAlta<fNac, fAlta>fActual o fNac>fActual
-	 * @throws TarifaErronea, se lanzara cuando la tarifa sea erronea
 	 * @throws ConsumoErroneo, se lanzara cuando el consumo sea negativo
 	 */
-	@SuppressWarnings("deprecation")
 	public double precio(TipoTarifa tarifa, Date fechaAlta, Date fechaNacimiento, int consumo) throws FechaErronea,
 		ConsumoErroneo {
-		int desfase;
+		int limite;
+		double precioBasico = 0.0;
 		double precioFinal = 0.0;
-		double eurosDeMas = 0.0;
-		double eurosDeMasAlta = 0.0;
-		Calendar c = Calendar.getInstance();
-		//Si la fecha de alta es menor que la de nacimiento
-		if (fechaAlta.compareTo(fechaNacimiento) < 0) {
-			throw new FechaErronea(); 
+		double edad = diferenciaAnhos(System.currentTimeMillis(),fechaNacimiento.getTime());
+		double alta = diferenciaAnhos(System.currentTimeMillis(),fechaAlta.getTime());
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.YEAR, 2018);
+		double altaLimiteInf = diferenciaAnhos(calendar.getTime().getTime(), fechaAlta.getTime());
+		//Si el cliente se da de alta antes de nacer
+		if (edad < alta) {
+			throw new FechaErronea();
 		}
-		//Si la fecha es mayor que hoy
-		if (fechaAlta.compareTo(new Date(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE))) > 0) {
+		//Si la fecha de alta es mayor que hoy
+		if (alta < 0) {
 			throw new FechaErronea();
 		}
 		//Si el consumo es negativo 
 		if (consumo < 0) {
-			throw new ConsumoErroneo();
+			throw new ConsumoErroneo(); 
 		}
-
-		if (tarifa == TipoTarifa.TARIFA_A) { 
-			desfase = consumo - LIMITE_TARIFA_A;
-			// Si la fecha de alta esta entre 1/1/2018 y la fecha actual
-			if (fechaAlta.compareTo(new Date(2018,0,1)) >= 0) {  
-				eurosDeMasAlta = precios[0] * PORCENTAJE;
-			}
-			// Si el consumo es superior al de la tarifa contratada
-			if (desfase > 0) {
-				eurosDeMas = Math.ceil(desfase/CONSUMO) * EUROS_EXTRA;
-			}
-			precioFinal = precios[0] + eurosDeMas + eurosDeMasAlta;
-			// Si el cliente es mayor de 65 anhos 
-			if (fechaNacimiento.getYear() < 1953) {
-				precioFinal = precioFinal - precioFinal * PORCENTAJE;
-			}
-		} else if (tarifa == TipoTarifa.TARIFA_B) {
-			desfase = consumo - LIMITE_TARIFA_B;
-			// Si la fecha de alta esta entre 1/1/2018 y la fecha actual
-			if (fechaAlta.compareTo(new Date(2018,0,1)) >= 0) {
-				eurosDeMasAlta = precios[1] * PORCENTAJE;
-			}
-			// Si el consumo es superior al de la tarifa contratada
-			if (desfase > 0) {
-				eurosDeMas = Math.ceil(desfase/CONSUMO) * EUROS_EXTRA;
-			}
-			precioFinal = precios[1] + eurosDeMas + eurosDeMasAlta;
-			// Si el cliente es mayor de 65 anhos 
-			if (fechaNacimiento.getYear() < 1953) {
-				precioFinal = precioFinal - precioFinal * PORCENTAJE;
-			}
-		} else {
-			desfase = consumo - LIMITE_TARIFA_C;
-			// Si la fecha de alta esta entre 1/1/2018 y la fecha actual
-			if (fechaAlta.compareTo(new Date(2018,0,1)) >= 0) {
-				eurosDeMasAlta = precios[2] * PORCENTAJE;
-			}
-			// Si el consumo es superior al de la tarifa contratada
-			if (desfase > 0) {
-				eurosDeMas = Math.ceil(desfase/CONSUMO) * EUROS_EXTRA;
-			}
-			precioFinal = precios[2] + eurosDeMas + eurosDeMasAlta;
-			// Si el cliente es mayor de 65 anhos 
-			if (fechaNacimiento.getYear() < 1953) {
-				precioFinal = precioFinal - precioFinal * PORCENTAJE;
-			}
+		
+		//Comprobamos que tarifa tiene el cliente y calculamos lo
+		//que va a pagar en funcion de varias opciones
+		if(tarifa == TipoTarifa.TARIFA_A) { 
+			limite = 2000; //Limite de consumo
+			precioBasico = 30; //Precio basico
+		}else if(tarifa == TipoTarifa.TARIFA_B) {
+			limite = 4000; //Limite de consumo
+			precioBasico = 40; //Precio basico
+		}else {
+			limite = 6000; //Limite de consumo
+			precioBasico = 50; //Precio basico 
 		}
+		
+		precioFinal = extraAlta18(altaLimiteInf, precioBasico) + extraPorConsumo(consumo, limite);
+		precioFinal = descuentoPorJubilado(edad, precioFinal);
 
-		return precioFinal; 
+		return precioFinal;  
+	}
+	
+	/**
+	 * Metodo que retorna los euros de mas que
+	 * tiene que pagar un cliente si se ha pasado
+	 * del limite de su tarifa
+	 * @param consumo
+	 * @param limite
+	 * @return euros de mas a pagar
+	 */
+	private static double extraPorConsumo(int consumo, int limite) {
+		int desfase = consumo - limite;
+		double eurosDeMas = 0.0;
+		if(desfase > 0) {
+			eurosDeMas = Math.ceil(desfase/CONSUMO) * EUROS_EXTRA;
+		}
+		return eurosDeMas;
+	}
+	/**
+	 * Metodo que retorna el precio que tiene que pagar
+	 * un cliente si se da de alta a partir del 1/1/2018.
+	 * @param fecha
+	 * @param precio
+	 * @return precio con el incremento por darse de alta
+	 * despues del 1/1/2018
+	 */
+	private static double extraAlta18(double fecha, double precio) {
+		if(fecha <= 0) {
+			precio = precio + precio*PORCENTAJE;
+		}
+		return precio;
+	}
+	
+	/**
+	 * Metodo que retorna el precio que tiene que pagar
+	 * un cliente si es mayor de 65 anhos.
+	 * @param edadCliente
+	 * @param precio
+	 * @return precio con el descuento
+	 */
+	private static double descuentoPorJubilado (double edadCliente, double precio) {
+		if(edadCliente > 65) {
+			precio = precio - precio*PORCENTAJE;
+		}
+		return precio; 
+	}
+	
+	/**
+	 * Metodo que retorna la diferencia que hay entre dos anhos
+	 * @param anho1
+	 * @param anho2
+	 * @return diferencia de anhos
+	 */
+	private static double diferenciaAnhos(long anho1,long anho2){
+		return (anho1-anho2)/(365L*24*60*60*1000);  //Milisegundos del año 
 	}
 
 }
