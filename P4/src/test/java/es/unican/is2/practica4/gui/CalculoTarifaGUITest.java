@@ -5,7 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import es.unican.is2.gui.CalculoTarifaGUI;
+import es.unican.is2.practica4.gui.CalculoTarifaGUI;
 
 public class CalculoTarifaGUITest {
 
@@ -34,9 +34,9 @@ public class CalculoTarifaGUITest {
 			demo.textBox("txtFechaAlta").setText("11/07/2015");
 			demo.textBox("txtFechaNacimiento").setText("11/07/1976");
 			demo.textBox("txtConsumo").setText("8");
-			// Sleeps para ralentizar la ejecuci�n
+			// Sleeps para ralentizar la ejecucion
 			Thread.sleep(2000);
-			// Pulsamos el bot�n para calcular
+			// Pulsamos el boton para calcular
 			demo.button("btnCalcular").click();
 			// Comprobamos la salida
 			demo.textBox("txtPrecio").requireText("30.0");
@@ -48,7 +48,7 @@ public class CalculoTarifaGUITest {
 			demo.textBox("txtFechaNacimiento").setText("2015");
 			demo.textBox("txtConsumo").setText("8");
 			Thread.sleep(2000);
-			// Pulsamos el bot�n para calcular
+			// Pulsamos el boton para calcular
 			demo.button("btnCalcular").click();
 			// Comprobamos la salida
 			demo.textBox("txtPrecio").requireText("Fecha incorrecta");
@@ -59,14 +59,13 @@ public class CalculoTarifaGUITest {
 			demo.textBox("txtFechaNacimiento").setText("11/07/1976");
 			demo.textBox("txtConsumo").setText("");
 			Thread.sleep(2000);
-			// Pulsamos el bot�n para calcular
+			// Pulsamos el boton para calcular
 			demo.button("btnCalcular").click();
 			// Comprobamos la salida
 			demo.textBox("txtPrecio").requireText("Consumo no valido");
 			Thread.sleep(2000);
 
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -36,7 +36,7 @@
 					<!-- MainClass in manifest make a executable jar -->
 					<archive>
 						<manifest>
-							<mainClass>es.unican.is2.practica4.Tarifas_18</mainClass>
+							<mainClass>es.unican.is2.practica4.gui.CalculoTarifaGUI</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

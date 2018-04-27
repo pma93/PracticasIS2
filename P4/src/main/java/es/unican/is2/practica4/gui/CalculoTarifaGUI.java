@@ -1,4 +1,4 @@
-package es.unican.is2.gui;
+package es.unican.is2.practica4.gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
