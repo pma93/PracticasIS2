@@ -36,7 +36,7 @@ public class Tarifas_18 implements ITarifas_18 {
 	 */
 	public double precio(TipoTarifa tarifa, Date fechaAlta, Date fechaNacimiento, int consumo) throws FechaErronea, ConsumoErroneo 
 	{
-		int limite;
+		int limite = 0;
 		double precioBasico = 0.0;
 		double precioFinal = 0.0;
 		double edad = diferenciaAnhos(System.currentTimeMillis(),fechaNacimiento.getTime());
@@ -60,15 +60,19 @@ public class Tarifas_18 implements ITarifas_18 {
 		
 		//Comprobamos que tarifa tiene el cliente y calculamos lo
 		//que va a pagar en funcion de varias opciones
-		if (tarifa == TipoTarifa.TARIFA_A) { 
+		switch (tarifa) {
+		case TARIFA_A:
 			limite = 2000; //Limite de consumo
 			precioBasico = 30; //Precio basico
-		}else if (tarifa == TipoTarifa.TARIFA_B) {
+			break;
+		case TARIFA_B:
 			limite = 4000; //Limite de consumo
 			precioBasico = 40; //Precio basico
-		}else {
+			break;
+		case TARIFA_C:
 			limite = 6000; //Limite de consumo
 			precioBasico = 50; //Precio basico 
+			break;
 		}
 		
 		precioFinal = extraAlta18(altaLimiteInf, precioBasico) + extraPorConsumo(consumo, limite);

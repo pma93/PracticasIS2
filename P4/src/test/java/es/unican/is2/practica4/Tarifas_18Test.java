@@ -32,14 +32,14 @@ public class Tarifas_18Test {
 	
 	/**
 	 * CASOS DE PRUEBA VALIDOS
-	 * NUMTEST: 11
+	 * NUMTEST: 12
 	 */
 	@Test
 	public void testPrecioValidos() 
 	{
-		//Test 1: (tarifaA, 2017, 1954, 1000)
+		//Test 1: (tarifaA, 2016, 1954, 1000)
 		//Resultado: 30€
-		fechaAlta.set(Calendar.YEAR,2017);
+		fechaAlta.set(Calendar.YEAR,2016);
 		fechaNacimiento.set(Calendar.YEAR,1954);
 		try {
 			assertTrue(tarifas18.precio(TipoTarifa.TARIFA_A, fechaAlta.getTime(), fechaNacimiento.getTime(), 1000)==30.0);
@@ -97,9 +97,9 @@ public class Tarifas_18Test {
 			fail("No deberia lanzar la excepcion consumo erroneo");
 		} 
 		
-		//Test 6: (tarifaC, 2017, 1953, 4000)
+		//Test 6: (tarifaC, 2016, 1953, 4000)
 		//Resultado: 50€
-		fechaAlta.set(Calendar.YEAR,2017);
+		fechaAlta.set(Calendar.YEAR,2016);
 		fechaNacimiento.set(Calendar.YEAR,1953);
 		try {
 			assertTrue(tarifas18.precio(TipoTarifa.TARIFA_C, fechaAlta.getTime(), fechaNacimiento.getTime(), 4000)==50.0);
@@ -157,9 +157,9 @@ public class Tarifas_18Test {
 			fail("No deberia lanzar la excepcion consumo erroneo");
 		}
 		
-		//Test 11: (tarifaB, 2017, 1950, 6001)
+		//Test 11: (tarifaB, 2016, 1950, 6001)
 		//Resultado: 79.8€	
-		fechaAlta.set(Calendar.YEAR,2017);
+		fechaAlta.set(Calendar.YEAR,2016);
 		fechaNacimiento.set(Calendar.YEAR,1950);
 		try {
 			assertTrue(tarifas18.precio(TipoTarifa.TARIFA_B, fechaAlta.getTime(), fechaNacimiento.getTime(), 6001)==79.8);
@@ -169,21 +169,12 @@ public class Tarifas_18Test {
 			fail("No deberia lanzar la excepcion consumo erroneo");
 		}
 		
-	}
-	
-	/**
-	 * Casos de prueba adicionales para intentar alcanzar 
-	 * la cobertura pedidda
-	 */
-	@Test
-	public void testPrecioValidosAdicionales() 
-	{	
-		//Test adicional 1: (tarifaC, 2017, 1954)
-		//Resultado: 54.0€ 
+		//Test 12: (tarifaC, 2017, 1954, 10000)
+		//Resultado: 130.0€ 
 		fechaAlta.set(Calendar.YEAR,2017);
 		fechaNacimiento.set(Calendar.YEAR,1954);
 		try {
-			assertTrue(tarifas18.precio(TipoTarifa.TARIFA_C, fechaAlta.getTime(), fechaNacimiento.getTime(), 6001)==54.0);
+			assertTrue(tarifas18.precio(TipoTarifa.TARIFA_C, fechaAlta.getTime(), fechaNacimiento.getTime(), 10000)==130.0);
 		}catch (FechaErronea e) {
 			fail("No deberia lanzar la excepcion fecha erronea");
 		}catch (ConsumoErroneo e) {
@@ -199,7 +190,7 @@ public class Tarifas_18Test {
 	@Test
 	public void testPrecioNoValidos() 
 	{
-		//Test 13: (tarifaA, 1954, 2018, 0)
+		//Test 14: (tarifaA, 1954, 2018, 0)
 		//Resultado: Error, fAlta<fNac
 		fechaAlta.set(Calendar.YEAR,1954);
 		fechaNacimiento.set(Calendar.YEAR,2018);
@@ -211,7 +202,7 @@ public class Tarifas_18Test {
 		}catch (ConsumoErroneo e) {
 			//
 		}
-		//Test 14: (tarifaA, 2020, 1953, 0)
+		//Test 15: (tarifaA, 2020, 1953, 0)
 		//Resultado: Error, fAlta>hoy
 		fechaAlta.set(Calendar.YEAR,2020);
 		fechaNacimiento.set(Calendar.YEAR,1953);
@@ -224,7 +215,7 @@ public class Tarifas_18Test {
 			//
 		}
 		
-		//Test 19: (tarifaA, 2018, 1952, -20)
+		//Test 20: (tarifaA, 2018, 1952, -20)
 		//Resultado: Error, consumo<0
 		fechaAlta.set(Calendar.YEAR,2018);
 		fechaNacimiento.set(Calendar.YEAR,1952);
