@@ -1,0 +1,14 @@
+TiendaIS2
+Avda. de los Castros s/n
+	
+Senior
+     Nombre: Juan   DNI: 11111111B   totalVentasMes: 600.0 
+     Nombre: Marta   DNI: 22222222C   totalVentasMes: 500.0
+     Nombre: Marcos   DNI: 45454545X   totalVentasMes: 600.0
+      
+Junior
+     Nombre: Pedro   DNI: 33333333N  totalVentasMes: 700.0
+     Nombre: Maria   DNI: 12345678P   totalVentasMes: 345.0
+      
+Practicas
+     Nombre: Patricia   DNI: 78787878C   totalVentasMes: 345.0
