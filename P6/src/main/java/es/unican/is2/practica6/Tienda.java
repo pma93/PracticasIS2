@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 public class Tienda {
 
 	private LinkedList<Vendedor> vendedores = new LinkedList<Vendedor>();
+	private List<Vendedor> resultado = new LinkedList<Vendedor>();
 	private String direccion;
 	private String nombre;
 
@@ -34,10 +35,11 @@ public class Tienda {
 	public Tienda(String nombre, String direccion) {
 		this.direccion = direccion;
 		this.nombre = nombre;
+		vendedores();
 	}
 
 	public Tienda() {
-		
+		vendedores();
 	}
 
 	/**
@@ -117,7 +119,7 @@ public class Tienda {
 	 */
 	public Vendedor buscaVendedor(String dni) {
 		
-		for (Vendedor v : vendedores) {
+		for (Vendedor v : vendedores) { 
 			if (v.getDni().equals(dni)) {
 				return v;
 			}
@@ -135,31 +137,46 @@ public class Tienda {
 		try {
 			// abre el fichero
 			in = new Scanner(new FileReader("datosTienda.txt"));
-			// configura el formato de números
+			// configura el formato de numeros
 			in.useLocale(Locale.ENGLISH);
 			nombre = in.nextLine();
 			direccion = in.nextLine();
-			String tipoVendedor = null;
-			String nombreTmp = null; 
-			String dni = null; 
-			String siglinea = null;
-			double totalVentas;
-			
-			while (in.hasNext()) {							
-				siglinea = in.next();
-				
-				if(siglinea.equals("Senior") ||
-						siglinea.equals("Junior") ||
-							siglinea.equals("Practicas")){
-					tipoVendedor = siglinea;
-					in.next();					
-				}
-				nombreTmp = in.next();
+			in.next();
+			Vendedor ven = null;
+			String nombretmp;
+			// lee los vendedores senior
+			while (in.hasNext() && !in.next().equals("Junior")) {
+
+				nombretmp = in.next();
 				in.next();
-				dni = in.next();
+				String dniIn = in.next();
 				in.next();
-				totalVentas = in.nextDouble();
-				cargaVendedorDeFichero(nombreTmp, dni, totalVentas, tipoVendedor);
+				double totalVentas = in.nextDouble();
+				ven = new VendedorEnPlantilla(nombretmp, dniIn, TipoVendedor.JUNIOR);
+				ven.setTotalVentas(totalVentas);
+				vendedores.add(ven);
+			}
+			// lee los vendedores junior
+			while (in.hasNext() && !in.next().equals("Practicas")) {
+				nombretmp = in.next();
+				in.next();
+				String dniIn = in.next();
+				in.next();
+				double totalVentas = in.nextDouble();
+				ven = new VendedorEnPracticas(nombretmp, dniIn);
+				ven.setTotalVentas(totalVentas);
+				vendedores.add(ven);
+			}
+			while (in.hasNext()) {
+				in.next();
+				nombretmp = in.next();
+				in.next();
+				String dniIn = in.next();
+				in.next();
+				double totalVentas = in.nextDouble();
+				ven = new VendedorEnPlantilla(nombretmp, dniIn, TipoVendedor.SENIOR);
+				ven.setTotalVentas(totalVentas);
+				vendedores.add(ven);
 			}
 			
 		} catch (FileNotFoundException e) {
@@ -173,27 +190,6 @@ public class Tienda {
 	}
 	
 	/**
-	 * Funcion para facilitar la inserccion de vendedores
-	 * desde la carga de un fichero de texto. 
-	 * @param nombre con el nombre del vendedor
-	 * @param dni con el dni del vendedor
-	 * @param tipo con el tipo del vendedor, posibles valores:
-	 * 		Junior, Senior, Prácticas
-	 */
-	private void cargaVendedorDeFichero(String nombre, String dni, double totalVentas, String tipoVendedor){		
-		Vendedor vendedor = null;
-		if(tipoVendedor.equals("Junior")) {
-			vendedor = new VendedorEnPlantilla(nombre, dni, TipoVendedor.JUNIOR);
-		}else if(tipoVendedor.equals("Senior")) {
-			vendedor = new VendedorEnPlantilla(nombre, dni, TipoVendedor.SENIOR);
-		}else {
-			vendedor = new VendedorEnPracticas(nombre, dni);
-		}
-		vendedor.setTotalVentas(totalVentas);
-		anhadeVendedor(vendedor); 
-	}
-	
-	/**
 	 * Metodo que genera el fichero datosTienda.txt con los datos actualizados
 	 * de los vendedores
 	 */
@@ -202,8 +198,6 @@ public class Tienda {
 	}
 	
 	public List<Vendedor> vendedorMaxComision() {
-		List<Vendedor> resultado;
-		resultado = new LinkedList<Vendedor>();
 		
 		double maxComision= 0.0;
 		for (Vendedor v : vendedores) {
@@ -215,13 +209,11 @@ public class Tienda {
 				resultado.add(v);
 			}
 		}
-		
+		 
 		return resultado;
 	}
 	
 	public List<Vendedor> vendedorDelMes() {
-		List<Vendedor> resultado;
-		resultado = new LinkedList<Vendedor>();
 		
 		double maxVentas = 0.0;
 		for (Vendedor v : vendedores) {

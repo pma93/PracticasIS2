@@ -22,7 +22,7 @@ public class VendedorEnPracticasTest {
 	
 	@Test
 	public void testConstructor() {
-		assertEquals("12345678A", junior.getDni());
+		assertEquals("12345678A", junior.getDni()); 
 		assertEquals("Ana", junior.getNombre());
 	}
 
@@ -30,16 +30,16 @@ public class VendedorEnPracticasTest {
 	public void testAnhadeVenta() {
 		
 		junior.anhadeVenta(200);
-		assertEquals(200, junior.getTotalVentas(), 0);
-		assertEquals(1, junior.getComisionAcumulada(), 0.1);
+		assertEquals("",200,junior.getTotalVentas(),0.1);
+		assertEquals("",1,junior.getComisionAcumulada(),0.1);
 		
 		junior.anhadeVenta(300);
-		assertEquals(500, junior.getTotalVentas(), 0);
-		assertEquals(2.5, junior.getComisionAcumulada(), 0.1);
+		assertEquals("",500,junior.getTotalVentas(),0.1);
+		assertEquals("",2.5,junior.getComisionAcumulada(),0.1);
 		
 		senior.anhadeVenta(200);
-		assertEquals(200, senior.getTotalVentas(), 0);
-		assertEquals(2, senior.getComisionAcumulada(), 0.1);
+		assertEquals("",200,senior.getTotalVentas(),0.1);
+		assertEquals("",2,senior.getComisionAcumulada(),0.1);
 		
 	}
 	
@@ -47,12 +47,12 @@ public class VendedorEnPracticasTest {
 	public void testSetTotalVentas() {
 		
 		junior.setTotalVentas(2000);
-		assertEquals(2000, junior.getTotalVentas(), 0);
-		assertEquals(10, junior.getComisionAcumulada(), 0.1);
+		assertEquals("",2000,junior.getTotalVentas(),0.1);
+		assertEquals("",10,junior.getComisionAcumulada(),0.1);
 		
 		senior.setTotalVentas(4500);
-		assertEquals(4500, senior.getTotalVentas(), 0);
-		assertEquals(45, senior.getComisionAcumulada(), 0.1);
+		assertEquals("",4500,senior.getTotalVentas(),0.1);
+		assertEquals("",45,senior.getComisionAcumulada(),0.1);
 		
 	}
 

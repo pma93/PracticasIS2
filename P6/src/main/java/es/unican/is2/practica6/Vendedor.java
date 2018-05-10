@@ -90,7 +90,7 @@ public abstract class Vendedor {
 	
 	
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) { 
 		if (!(obj instanceof Vendedor)) 
 			return false;
 		Vendedor v = (Vendedor) obj;

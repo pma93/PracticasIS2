@@ -25,11 +25,10 @@ public class GestionComisiones {
 		String dni;
 		Lectura lect;
 		List<Vendedor> resultado;
-		StringBuilder bld = new StringBuilder();
+		StringBuilder bld = new StringBuilder(); 
 
 		// crea la tienda
 		Tienda tienda = new Tienda();
-		tienda.vendedores();
 		
 		// crea la ventana de menu
 		Menu menu = new Menu("Comisiones tienda");

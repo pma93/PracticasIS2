@@ -22,7 +22,7 @@ public class VendedorEnPlantilla extends Vendedor {
 			porcentajeComision(COMISION_SENIOR);
 	}
 	
-	public TipoVendedor tipo() {
+	public TipoVendedor getTipo() {
 		return tipo;
 	}
 }

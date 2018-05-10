@@ -27,13 +27,13 @@ public class VendedorEnPlantillaTest {
 	@Test
 	public void testAnhadeVenta() {
 		
-		v.anhadeVenta(200);
-		assertEquals(200, v.getTotalVentas(), 0);
-		assertEquals(0, v.getComisionAcumulada(), 0.1);
+		v.anhadeVenta(200); 
+		assertEquals("",200,v.getTotalVentas(),0);
+		assertEquals("",0,v.getComisionAcumulada(),0);
 		
 		v.anhadeVenta(300);
-		assertEquals(500, v.getTotalVentas(), 0);
-		assertEquals(0, v.getComisionAcumulada(), 0.1);
+		assertEquals("",500,v.getTotalVentas(),0);
+		assertEquals("",0,v.getComisionAcumulada(),0);
 		
 	
 	}
@@ -42,8 +42,8 @@ public class VendedorEnPlantillaTest {
 	public void testSetTotalVentas() {
 		
 		v.setTotalVentas(2000);
-		assertEquals(2000, v.getTotalVentas(), 0);
-		assertEquals(0, v.getComisionAcumulada(), 0.1);
+		assertEquals("",2000,v.getTotalVentas(),0);
+		assertEquals("",0,v.getComisionAcumulada(),0);
 		
 	}
 
