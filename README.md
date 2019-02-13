@@ -9,3 +9,5 @@ Práctica 4:
 Práctica 6:
   - Aplicar refactorizaciones a un código dado
   - Análisis de calidad mediante SonarQube
+  
+Para la construcción de las tres prácticas se ha usado Maven.
