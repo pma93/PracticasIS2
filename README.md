@@ -1,6 +1,7 @@
 # IS21718
 Práctica 3:
   - Creación de un despertador utilizando eventos temporizados
+  - Uso del patrón MVC
   
 Práctica 4:
   - Calculador de tarifas telefónicas
